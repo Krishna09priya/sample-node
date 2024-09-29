@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: bisque;">
+    <div class="container mt-5">
+        <h1>Weight List</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Weight</th>
+                    <th>Date</th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% weights.forEach(weight => { %>
+                    <tr>
+                        <td><%= weight.weight %>kg</td>
+                        <td><%= weight.date %></td>
+                        <td><a href="update_weight/<%= weight._id %>" value="edit" type="submit">Edit</a></td>
+                        <td><a href="delete_weight/<%= weight._id %>" value="delete" type="submit">Delete</a></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+
+        <!-- Pagination Controls -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <!-- Previous Page Link -->
+                <li class="page-item <%= pagination.page === 1 ? 'disabled' : '' %>">
+                    <a class="page-link" href="?page=<%= pagination.page - 1 %>&limit=<%= pagination.limit %>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <!-- Page Numbers -->
+                <% for(let i = 1; i <= pagination.totalPages; i++) { %>
+                    <li class="page-item <%= pagination.page === i ? 'active' : '' %>">
+                        <a class="page-link" href="?page=<%= i %>&limit=<%= pagination.limit %>"><%= i %></a>
+                    </li>
+                <% } %>
+
+                <!-- Next Page Link -->
+                <li class="page-item <%= pagination.page === pagination.totalPages ? 'disabled' : '' %>">
+                    <a class="page-link" href="?page=<%= pagination.page + 1 %>&limit=<%= pagination.limit %>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <button class="btn" ><a href="/weights/dashboard">Back</a></button>
+        <button class="btn"><a href="/weights/weight_loss">Calculate the weight loss</a></button>
+    </div>
+</body>
+</html>

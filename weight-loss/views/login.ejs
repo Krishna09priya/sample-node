@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  height: 100%;
+  margin: 0;
+  font-family:sans-serif;
+}
+
+.left, .right {
+  box-sizing: border-box;
+  float: left; 
+  overflow: hidden;
+  padding: 50px;
+}
+
+
+.left {
+  width:50%;
+  height: 100vh;
+  background-image: linear-gradient(#ffc2cd, #C2A174);
+}
+
+.right {
+  padding-left: 4%;
+  width:50%;
+  height: 100vh;
+  padding-top: 10%;
+  background-color: #ffffff;
+  float: right; 
+}
+
+input[type=email], input[type=password] {
+  width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0px;
+  display: block;
+  box-sizing: border-box;
+}
+
+h1{
+  padding-bottom: 10px;
+  color: 	#ff00aa;
+  font-weight: bolder;
+  font-size: x-large;
+}
+
+.email, .pass {
+  font-weight: bolder;
+  font-size: large;
+}
+
+.checkbox {
+  font-weight: bold;
+  font-size: medium;
+}
+
+
+
+button {
+  font-size: medium;
+  background-color: #ff9ef4;
+  color: #877068;
+  padding: 9px 20px;
+  margin: 8px 0px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  display: block;
+} 
+
+@media (max-width:767px){ 
+  .left{display: none;}
+  .right {
+    padding-left: 9%;
+    width: 100%;
+    float: none;}
+   }
+</style>
+</head>
+<body>
+  
+     <div class="left">
+     </div>
+     <div class="right">
+       <h1> Login Form</h1>
+       <form action="/login" method="post">
+        <label for="email" class="email"> Email: </label> 
+        <input type="email"  name="email" required> 
+        <label for="pass" class="pass"> Password: </label>   
+        <input type="Password" name="password" required>  
+        <button type="submit">Login</button>
+        <p style="color: #ff084a; text-align: center;" >Not registered?<a style="color: #ff084a;" href="\signup">create an account</a></p>
+       </form>
+       <% if (errors.length > 0) { %>
+        <div style="color: red;">
+         <ul>
+             <% errors.forEach(function(error) { %>
+                 <li><%= error.msg %></li>
+             <% }); %>
+         </ul>
+         </div>
+        <% } %>
+  </div>
+  
+</body>
+</html>

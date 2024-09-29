@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Weight Loss</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body style="background-color:#ffc2cd;">
+    <div class="container mt-5">
+        <h1>Calculate Weight Loss Between Two Dates</h1>
+        <% if (error) { %>
+            <div style="color: red;">
+                <p>Error: <%= error %></p>
+            </div>
+        <% } %>
+
+        <form id="weight-loss-form">
+            <div class="form-group">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="startDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="endDate" class="form-control" required>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary"><a href="/weights/dashboard" style="color: white;">Back to dashboard</a></button>
+                <button type="submit" class="btn btn-primary">Calculate Weight Loss</button>
+            </div>
+        </form>
+
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <script>
+        document.getElementById('weight-loss-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            axios.post('/weights/weight_loss', {
+                startDate: startDate,
+                endDate: endDate
+            })
+            .then(function (response) {
+                const data = response.data;
+                document.getElementById('result').innerHTML = `<p>Weight Loss: ${data.weightLoss} kg</p>`;
+            })
+            .catch(function (error) {
+                const errorMessage = error.response && error.response.data && error.response.data.error ? error.response.data.error : 'An error occurred';
+                document.getElementById('result').innerHTML = `<p style="color: red;">${errorMessage}</p>`;
+            });
+        });
+    </script>
+</body>
+</html>

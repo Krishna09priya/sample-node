@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #ffc2cd;">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card px-4 py-3">
+          <div class="card-body">
+            <h2 class="card-title font-weight-bold" style="color: #ff08c9; text-align: center;">Dashboard</h2>
+            <!-- form submission -->
+            <form action="/weights/add" method="post">
+              <div class="form-group">
+                <label for="weight" style="color: brown; font-size: larger;">Weight (kg):</label>
+                <input type="number" name="weight" id="weight" step="0.1" required class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block" style="background-color: #ff6289;">Add Weight</button>
+            </form>
+            <br>
+            <div class="d-flex justify-content-between">
+              <a href="/weights/weight_list" class="btn btn-link">View All Weights</a>
+              <a href="/weights/weight_loss" class="btn btn-link">Calculate the Weight Loss</a>
+            </div>
+            <br>
+            <form action="/logout" method="get">
+              <button type="submit" class="btn btn-danger btn-block">Logout</button>
+            </form>
+            <br>
+            <!-- error display -->
+            <% if (error) { %>
+              <p style="color: red;"><%= error %></p>
+            <% } %>
+            <% if (success) { %>
+              <p style="color: green;"><%= success %></p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
